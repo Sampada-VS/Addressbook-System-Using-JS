@@ -12,7 +12,7 @@ class Addressbook{
 
     get firstName() {return this._firstName;}
     set firstName(firstName) {
-        var nameRegex=RegExp('^[A-Z][a-z]{2,}$');
+        let nameRegex=RegExp('^[A-Z][a-z]{2,}$');
         if(nameRegex.test(firstName))
             this._firstName=firstName;
         else
@@ -20,6 +20,7 @@ class Addressbook{
         }
     get lastname() {return this._lastname;}
     set lastname(lastname) {
+        let nameRegex=RegExp('^[A-Z][a-z]{2,}$');
         if(nameRegex.test(lastname))
             this._lastname=lastname;
         else
@@ -27,7 +28,7 @@ class Addressbook{
         }
     get address() {return this._address;}
     set address(address) {
-        var addrRegex=RegExp('^[A-Z][a-z]{3,}$');
+        let addrRegex=RegExp('^[A-Z][a-z]{3,}$');
         if(addrRegex.test(address))
             this._address=address;
         else
@@ -35,6 +36,7 @@ class Addressbook{
         }
     get city() {return this._city;}
     set city(city) {
+        let addrRegex=RegExp('^[A-Z][a-z]{3,}$');
         if(addrRegex.test(city))
             this._city=city;
         else
@@ -42,6 +44,7 @@ class Addressbook{
     }
     get state() {return this._state;}
     set state(state) {
+        let addrRegex=RegExp('^[A-Z][a-z]{3,}$');
         if(addrRegex.test(state))
             this._state=state;
         else
@@ -56,7 +59,7 @@ class Addressbook{
         }
     get phone() {return this._phone;}
     set phone(phone) {
-        let phoneRegex=RegExp('^[1-9]{1}[0-9]{2}[ ]?[0-9]{3}$');
+        let phoneRegex=RegExp('^[1-9]{2,3}\\s[7-9]{1}[0-9]{9}$');
         if(phoneRegex.test(phone))
             this._phone=phone;
         else
@@ -72,8 +75,11 @@ class Addressbook{
     }
 
     toString(){
-        return "First Name: "+this.firstName+", Last Name: "+this.lastname+", Address: "+
+        return "First Name: "+this.firstName+", Last Name: "+this.lastname+"\nAddress: "+
         this.address+", City: "+this.city+", State: "+this.state+", Zip: "+this.zip+
-        ", Phone No: "+this.phone+", Email: "+this.email;
+        "\nPhone No: "+this.phone+", Email: "+this.email;
     }
 }
+
+let addressbookData=new Addressbook("Sam","Shiv","Dadar","Mumb","Maha","400101","91 9876543210","ab@gmail.com");
+console.log(addressbookData.toString());
