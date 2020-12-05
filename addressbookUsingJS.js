@@ -75,11 +75,12 @@ class Addressbook{
     }
 
     toString(){
-        return "First Name: "+this.firstName+", Last Name: "+this.lastname+"\nAddress: "+
+        return "\nFirst Name: "+this.firstName+", Last Name: "+this.lastname+"\nAddress: "+
         this.address+", City: "+this.city+", State: "+this.state+", Zip: "+this.zip+
         "\nPhone No: "+this.phone+", Email: "+this.email;
     }
 }
 
-let addressbookData=new Addressbook("Sam","Shiv","Dadar","Mumb","Maha","400101","91 9876543210","ab@gmail.com");
+let addressbookData=new Array(new Addressbook("Terrisa","Soo","Dadar","Mumb","Maha","400101","91 9876543210","ts@gmail.com"));
+addressbookData.push(new Addressbook("Mark","Noo","Cstm","Mumb","Maha","410101","91 9878543210","mn@gmail.com"));
 console.log(addressbookData.toString());
