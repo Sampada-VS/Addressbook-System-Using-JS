@@ -110,12 +110,26 @@ function updateContact(){
     if(found == 1){
         addContact();
     }
-    else
-        console.log("No contact found.");    
+    else console.log("No contact found.");    
+}
+function deleteContact(){
+    let name=prompt("Enter First Name to delete contact :");
+    let found=0;
+    for (i = 0; i < addressbookData.length; i++) {
+        let data=addressbookData[i];
+        if(name.toLowerCase() === data.firstName.toLowerCase()){
+            found=1;
+            addressbookData.splice(i, 1);
+        }
+    }
+    if(found == 1)
+        console.log("Contact deleted.");
+    else console.log("No contact found.");    
 }
 
 do{
-var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts 4.Exit== "));
+var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
+                        " 4.Delete Contact 5.Exit== "));
     switch(choice){
         case 1: addContact();
                 break;
@@ -123,8 +137,10 @@ var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Di
                 break;
         case 3: console.log("All Contacts are :"+addressbookData.toString());
                 break;
-        case 4: console.log("You exit the program.");
+        case 4: deleteContact();
+                break;
+        case 5: console.log("You exit the program.");
                 break;
         default:    console.log("Wrong choice.");
     }
-}while(choice != 4);
+}while(choice != 5);
