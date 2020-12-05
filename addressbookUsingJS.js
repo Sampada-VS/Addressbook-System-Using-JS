@@ -77,12 +77,14 @@ class Addressbook{
     }
 
     toString(){
-        return "First Name: "+this.firstName+", Last Name: "+this.lastName+"\nAddress: "+
+        return "\nFirst Name: "+this.firstName+", Last Name: "+this.lastName+"\nAddress: "+
         this.address+", City: "+this.city+", State: "+this.state+", Zip: "+this.zip+
         "\nPhone No: "+this.phone+", Email: "+this.email;
     }
 }
 var addressbookData=new Array();
+addressbookData.push(new Addressbook("Mark","Noo","Cstm","Mumb","Maha","410101","91 9878543210","mn@gmail.com"));
+addressbookData.push(new Addressbook("Terrisa","Soo","Dadar","Mumb","Maha","400101","91 9876543210","ts@gmail.com"));
 function addContact(){
     let firstName=prompt("Enter First Name :");
     let lastName=prompt("Enter Last Name :");
@@ -92,18 +94,36 @@ function addContact(){
     let zip=prompt("Enter zip code :");
     let phone=prompt("Enter phone number :");
     let email=prompt("Enter email id :");
-    console.log("\nContact added :");
     addressbookData.push(new Addressbook(firstName,lastName,address,city,state,zip,phone,email));
-    console.log(addressbookData.toString());
+    console.log("\n New Contact added..");
+}
+function updateContact(){
+    let name=prompt("Enter First Name to update contact :");
+    let found=0;
+    for (i = 0; i < addressbookData.length; i++) {
+        let data=addressbookData[i];
+        if(name.toLowerCase() === data.firstName.toLowerCase()){
+            found=1;
+            addressbookData.splice(i, 1);
+        }
+    }
+    if(found == 1)
+        addContact();
+    else
+        console.log("No contact found.");    
 }
 
 do{
-var choice=Number(prompt("Enter option : 1.Add New contact 2.Exit== "));
+var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts 4.Exit== "));
     switch(choice){
         case 1: addContact();
                 break;
-        case 2: console.log("You exit the program.");
+        case 2: updateContact();
+                break;
+        case 3: console.log("All Contacts are :"+addressbookData.toString());
+                break;
+        case 4: console.log("You exit the program.");
                 break;
         default:    console.log("Wrong choice.");
     }
-}while(choice != 2);
+}while(choice != 4);
