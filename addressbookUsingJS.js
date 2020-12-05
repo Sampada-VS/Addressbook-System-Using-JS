@@ -125,30 +125,32 @@ function deleteContact(){
         console.log("Contact deleted.");
     else console.log("No contact found.");    
 }
-function searchByCity(){
-    let cityName=prompt("Enter city to search contact :");
-    let cityPerson=addressbookData.filter(contact => cityName.toLowerCase() === contact.city.toLowerCase())
+function searchPersonByCity(){
+    let cityName=prompt("Enter city :");
+    let name=prompt("Enter name to search :");
+    let cityPerson=addressbookData.filter(contact => cityName.toLowerCase() === contact.city.toLowerCase() && name.toLowerCase() === contact.firstName.toLowerCase())
                     .map(contact => contact.toString());
     if(cityPerson.length != 0){
-    console.log("Persons in city "+cityName+" are : ");
+    console.log("Person "+name+" found in city "+cityName+" . ");
     console.log(cityPerson.toString());
     }
-    else console.log("Persons in city "+cityName+" are : 0 ");
+    else console.log("Person "+name+" not found in city "+cityName+" . ");
 }
-function searchByState(){
-    let stateName=prompt("Enter state to search contact :");
-    let statePerson=addressbookData.filter(contact => stateName.toLowerCase() === contact.state.toLowerCase())
+function searchPersonByState(){
+    let stateName=prompt("Enter state :");
+    let name=prompt("Enter name to search :");
+    let statePerson=addressbookData.filter(contact => stateName.toLowerCase() === contact.state.toLowerCase() && name.toLowerCase() === contact.firstName.toLowerCase())
                     .map(contact => contact.toString());
     if(statePerson.length != 0){
-    console.log("Persons in state "+stateName+" are : ");
+    console.log("Persons "+name+" found in state "+stateName+" . ");
     console.log(statePerson.toString());
     }
-    else console.log("Persons in state "+stateName+" are : 0");
+    else console.log("Persons "+name+" not found in state "+stateName+" . ");
 }
 
 do{
 var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
-                        " 4.Delete Contact 5.Total Contacts 6.Search By City 7.Search By State 8.Exit== "));
+                        " 4.Delete Contact 5.Total Contacts 6.Search Person By City 7.Search Person By State 8.Exit== "));
     switch(choice){
         case 1: let fName=prompt("Enter First Name to add contact :");
                 let found=addressbookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
@@ -168,9 +170,9 @@ var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Di
         case 5: let totalContacts=addressbookData.reduce((totalContacts) => totalContacts+=1,0);
                 console.log("Number of contacts in addressbook are : "+totalContacts); 
                 break;
-        case 6: searchByCity();
+        case 6: searchPersonByCity();
                 break;
-        case 7: searchByState();
+        case 7: searchPersonByState();
                 break;
         case 8: console.log("You exit the program.");
                 break;
