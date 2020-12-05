@@ -84,7 +84,7 @@ class Addressbook{
 }
 var addressbookData=new Array();
 addressbookData.push(new Addressbook("Mark","Noo","Cstm","Mumb","Maha","410101","91 9878543210","mn@gmail.com"));
-addressbookData.push(new Addressbook("Terrisa","Soo","Dadar","Mumb","Maha","400101","91 9876543210","ts@gmail.com"));
+addressbookData.push(new Addressbook("Terrisa","Soo","Dadar","Nashik","Maha","400101","91 9876543210","ts@gmail.com"));
 
 function addContact(firstName){
     let lastName=prompt("Enter Last Name :");
@@ -125,15 +125,35 @@ function deleteContact(){
         console.log("Contact deleted.");
     else console.log("No contact found.");    
 }
+function searchByCity(){
+    let cityName=prompt("Enter city to search contact :");
+    let cityPerson=addressbookData.filter(contact => cityName.toLowerCase() === contact.city.toLowerCase())
+                    .map(contact => contact.toString());
+    if(cityPerson.length != 0){
+    console.log("Persons in city "+cityName+" are : ");
+    console.log(cityPerson.toString());
+    }
+    else console.log("Persons in city "+cityName+" are : 0 ");
+}
+function searchByState(){
+    let stateName=prompt("Enter state to search contact :");
+    let statePerson=addressbookData.filter(contact => stateName.toLowerCase() === contact.state.toLowerCase())
+                    .map(contact => contact.toString());
+    if(statePerson.length != 0){
+    console.log("Persons in state "+stateName+" are : ");
+    console.log(statePerson.toString());
+    }
+    else console.log("Persons in state "+stateName+" are : 0");
+}
 
 do{
 var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
-                        " 4.Delete Contact 5.Total Contacts 6.Exit== "));
+                        " 4.Delete Contact 5.Total Contacts 6.Search By City 7.Search By State 8.Exit== "));
     switch(choice){
         case 1: let fName=prompt("Enter First Name to add contact :");
                 let found=addressbookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
                                         .map(contact => contact.toString());
-                if(found == null){
+                if(found.length == 0){
                     addContact(fName);
                 }
                 else console.log("Contact already exists.");
@@ -148,8 +168,12 @@ var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Di
         case 5: let totalContacts=addressbookData.reduce((totalContacts) => totalContacts+=1,0);
                 console.log("Number of contacts in addressbook are : "+totalContacts); 
                 break;
-        case 6: console.log("You exit the program.");
+        case 6: searchByCity();
+                break;
+        case 7: searchByState();
+                break;
+        case 8: console.log("You exit the program.");
                 break;
         default:    console.log("Wrong choice.");
     }
-}while(choice != 6);
+}while(choice != 8);
