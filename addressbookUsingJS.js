@@ -85,8 +85,8 @@ class Addressbook{
 var addressbookData=new Array();
 addressbookData.push(new Addressbook("Mark","Noo","Cstm","Mumb","Maha","410101","91 9878543210","mn@gmail.com"));
 addressbookData.push(new Addressbook("Terrisa","Soo","Dadar","Mumb","Maha","400101","91 9876543210","ts@gmail.com"));
-function addContact(){
-    let firstName=prompt("Enter First Name :");
+
+function addContact(firstName){
     let lastName=prompt("Enter Last Name :");
     let address=prompt("Enter address :");
     let city=prompt("Enter city :");
@@ -97,8 +97,7 @@ function addContact(){
     addressbookData.push(new Addressbook(firstName,lastName,address,city,state,zip,phone,email));
     console.log("\n New Contact added..");
 }
-function updateContact(){
-    let name=prompt("Enter First Name to update contact :");
+function updateContact(name){
     let found=0;
     for (i = 0; i < addressbookData.length; i++) {
         let data=addressbookData[i];
@@ -108,7 +107,7 @@ function updateContact(){
         }
     }
     if(found == 1){
-        addContact();
+        addContact(name);
     }
     else console.log("No contact found.");    
 }
@@ -131,9 +130,16 @@ do{
 var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
                         " 4.Delete Contact 5.Total Contacts 6.Exit== "));
     switch(choice){
-        case 1: addContact();
+        case 1: let fName=prompt("Enter First Name to add contact :");
+                let found=addressbookData.filter(contact => fName.toLowerCase() === contact.firstName.toLowerCase())
+                                        .map(contact => contact.toString());
+                if(found == null){
+                    addContact(fName);
+                }
+                else console.log("Contact already exists.");
                 break;
-        case 2: updateContact();
+        case 2: let name=prompt("Enter First Name to update contact :");
+                updateContact(name);
                 break;
         case 3: console.log("All Contacts are :"+addressbookData.toString());
                 break;
