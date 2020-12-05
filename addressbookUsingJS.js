@@ -107,8 +107,9 @@ function updateContact(){
             addressbookData.splice(i, 1);
         }
     }
-    if(found == 1)
+    if(found == 1){
         addContact();
+    }
     else
         console.log("No contact found.");    
 }
