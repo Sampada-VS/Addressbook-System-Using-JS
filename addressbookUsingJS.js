@@ -1,7 +1,9 @@
+const prompt = require('prompt-sync')();
+
 class Addressbook{
     constructor(...params){
         this.firstName=params[0];
-        this.lastname=params[1];
+        this.lastName=params[1];
         this.address=params[2];
         this.city=params[3];
         this.state=params[4];
@@ -18,11 +20,11 @@ class Addressbook{
         else
             throw 'First name is incorrect.';
         }
-    get lastname() {return this._lastname;}
-    set lastname(lastname) {
+    get lastName() {return this._lastName;}
+    set lastName(lastName) {
         let nameRegex=RegExp('^[A-Z][a-z]{2,}$');
-        if(nameRegex.test(lastname))
-            this._lastname=lastname;
+        if(nameRegex.test(lastName))
+            this._lastName=lastName;
         else
             throw 'Last name is incorrect.';
         }
@@ -75,12 +77,33 @@ class Addressbook{
     }
 
     toString(){
-        return "\nFirst Name: "+this.firstName+", Last Name: "+this.lastname+"\nAddress: "+
+        return "First Name: "+this.firstName+", Last Name: "+this.lastName+"\nAddress: "+
         this.address+", City: "+this.city+", State: "+this.state+", Zip: "+this.zip+
         "\nPhone No: "+this.phone+", Email: "+this.email;
     }
 }
+var addressbookData=new Array();
+function addContact(){
+    let firstName=prompt("Enter First Name :");
+    let lastName=prompt("Enter Last Name :");
+    let address=prompt("Enter address :");
+    let city=prompt("Enter city :");
+    let state=prompt("Enter state :");
+    let zip=prompt("Enter zip code :");
+    let phone=prompt("Enter phone number :");
+    let email=prompt("Enter email id :");
+    console.log("\nContact added :");
+    addressbookData.push(new Addressbook(firstName,lastName,address,city,state,zip,phone,email));
+    console.log(addressbookData.toString());
+}
 
-let addressbookData=new Array(new Addressbook("Terrisa","Soo","Dadar","Mumb","Maha","400101","91 9876543210","ts@gmail.com"));
-addressbookData.push(new Addressbook("Mark","Noo","Cstm","Mumb","Maha","410101","91 9878543210","mn@gmail.com"));
-console.log(addressbookData.toString());
+do{
+var choice=Number(prompt("Enter option : 1.Add New contact 2.Exit== "));
+    switch(choice){
+        case 1: addContact();
+                break;
+        case 2: console.log("You exit the program.");
+                break;
+        default:    console.log("Wrong choice.");
+    }
+}while(choice != 2);
